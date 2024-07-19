@@ -1,16 +1,17 @@
 import { Stack } from "expo-router";
+import HomeScreen from ".";
 
 
-export const unstable_settings = {
-
-  initialRouteName: 'index',
-}
 
 
 export default function RootLayout() {
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="Wecker"
+        //component={HomeScreen}
+        options={{ title: 'Wecker' }}
+      />
     </Stack>
   );
 }
