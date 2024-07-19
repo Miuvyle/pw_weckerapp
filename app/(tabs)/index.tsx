@@ -1,8 +1,7 @@
 import { Text, View } from "react-native";
-import { TblO, Swch } from "@/components/overView"
+import { TouchableComponent } from "@/components/overView"
 
 export default function Index() {
-  //    const toggle = {<Swch/>};
   return (
     <View
       style={{
@@ -10,12 +9,9 @@ export default function Index() {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: '#363020'
-      }}
-    >
-      <TblO
-        givenTime="19:05"
-      />
-      <Swch />
+      }}>
+      <TouchableComponent
+        givenTime="19:05" />
     </View>
   );
 }
