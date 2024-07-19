@@ -1,15 +1,21 @@
 import { Text, View } from "react-native";
+import {TblO, Swch} from "@/components/overView.tsx"
 
 export default function Index() {
+//    const toggle = {<Swch/>};
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: '#363020'
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <TblO 
+    givenTime = "19:05"
+    /> 
+    <Swch/>
     </View>
   );
 }
