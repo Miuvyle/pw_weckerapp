@@ -15,20 +15,26 @@ export function TblO({givenTime}, {toggle}) {
 	);
 };
 
-/*function Swch = () => (
+export function Swch(){
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const hihi =  'yellow';
+  console.log(`Initial isEnabled state: ${isEnabled}`);
 	return (
 		<>
 		    <Switch
-				onValueChange={toggleSwitch}
-				value={isEnabled}
+		  	trackColor= {{false: '#abd1b5', true: '#79b791'}}
+		    	style={style.toggle}
+			onValueChange={toggleSwitch}
+			value={isEnabled}
+			thumbColor={isEnabled ? '#a49966' : '#a49966'}
+			aktiveThumbColor={'red'}
 
 			/>	
 		</>
 
 	);
-);*/
+};
 
 const style = StyleSheet.create({
 	button: {
@@ -38,7 +44,6 @@ const style = StyleSheet.create({
 		borderWidth: 0,
 		width: 300,
 		height: 100,
-		borderColor: '#222222',
 		backgroundColor: '#605C4E',
 	},
 	norm: {
@@ -47,6 +52,9 @@ const style = StyleSheet.create({
 	clock: {
   		color: '#C7C7A6',
                 fontSize: 40,
+	},
+	toggle: {
+			height: 40,
 	},
 })
  /* return (

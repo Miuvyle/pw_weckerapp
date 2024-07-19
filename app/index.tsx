@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import {TblO, Swch} from "@/components/overView.tsx"
 
 export default function Index() {
+//    const toggle = {<Swch/>};
   return (
     <View
       style={{
@@ -13,9 +14,8 @@ export default function Index() {
     >
     <TblO 
     givenTime = "19:05"
-    //toggle=<Swch/
-    >
-   //</TblO> <Swch/>
+    /> 
+    <Swch/>
     </View>
   );
 }
