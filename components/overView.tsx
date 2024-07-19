@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
-export function TblO({givenTime}) {
+export function TblO({givenTime}, {toggle}) {
   const [count, setCount] = useState(0)
 	return(
 		<>
@@ -8,11 +8,27 @@ export function TblO({givenTime}) {
 	>
 	<View style={style.norm}>
 	<Text style={style.clock}>{givenTime}</Text>
+	{toggle}
 	</View>
 	</TouchableOpacity>
 	</>
 	);
 };
+
+/*function Swch = () => (
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+	return (
+		<>
+		    <Switch
+				onValueChange={toggleSwitch}
+				value={isEnabled}
+
+			/>	
+		</>
+
+	);
+);*/
 
 const style = StyleSheet.create({
 	button: {
@@ -23,13 +39,13 @@ const style = StyleSheet.create({
 		width: 300,
 		height: 100,
 		borderColor: '#222222',
-		backgroundColor: '#222222',
+		backgroundColor: '#605C4E',
 	},
 	norm: {
 		
 	},
 	clock: {
-  		color: '#FFF',
+  		color: '#C7C7A6',
                 fontSize: 40,
 	},
 })

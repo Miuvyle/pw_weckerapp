@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import {TblO} from "@/components/overView.tsx"
+import {TblO, Swch} from "@/components/overView.tsx"
 
 export default function Index() {
   return (
@@ -8,10 +8,14 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: '#363020'
       }}
     >
     <TblO 
-    givenTime = "19:05"/>
+    givenTime = "19:05"
+    //toggle=<Swch/
+    >
+   //</TblO> <Swch/>
     </View>
   );
 }
