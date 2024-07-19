@@ -40,18 +40,18 @@ const style = StyleSheet.create({
     height: 100,
     backgroundColor: '#605C4E',
     justifyContent: 'center',
-    alignItens: 'center',
   },
 
   container: {
     justifyContent: 'center',
-    alignItens: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
   },
 
   clock: {
     color: '#EAFFDA',
     fontSize: 40,
-    alignSelf: 'strech',
+    alignSelf: 'stretch',
     flexGrow: 1,
   },
 
@@ -59,6 +59,6 @@ const style = StyleSheet.create({
     marginLeft: 200,
     height: 40,
     position: 'absolute',
-    top: 30,
+    transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }]
   },
 })
