@@ -1,5 +1,5 @@
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
-
+import { TimePicker } from '@/components/CogWheel'
 
 
 function americaYa() {
@@ -8,12 +8,14 @@ function americaYa() {
 }
 
 export default function Setting() {
-
   return (
     <View style={baseStyle.container}>
-      <TouchableOpacity onPress={americaYa} activeOpacity={0.5}>
-        <Text style={baseStyle.button}>Hallo du Uhren-Dude</Text>
-      </TouchableOpacity>
+      <TimePicker
+        timePick={12}
+      />
+      <TimePicker
+        timePick={12}
+      />
     </View>
 
 
@@ -33,7 +35,8 @@ const baseStyle = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "lightblue",
+    backgroundColor: "#363020",
+    flexDirection: "row"
   },
 
   button: {

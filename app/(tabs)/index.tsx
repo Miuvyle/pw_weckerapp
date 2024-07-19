@@ -2,7 +2,6 @@ import { Text, View } from "react-native";
 import { TblO, Swch } from "@/components/overView"
 
 export default function Index() {
-  //    const toggle = {<Swch/>};
   return (
     <View
       style={{
