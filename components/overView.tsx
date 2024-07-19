@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
-export function TblO({ givenTime }, { toggle }) {
+export function TouchableComponent({ givenTime }) {
   const [count, setCount] = useState(0)
   return (
-    <>
-      <TouchableOpacity style={style.button}
-      >
-        <View style={style.norm}>
-          <Link href="/Settings" style={style.clock}>{givenTime}</Link>
-          {toggle}
-        </View>
+    <View style={style.container}>
+      <TouchableOpacity style={style.button}>
+        <Link href="/Settings" style={style.clock}>{givenTime}</Link>
       </TouchableOpacity>
-    </>
+      <SwitchComponent />
+    </View>
   );
 };
 
-export function Swch() {
+export function SwitchComponent() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  console.log(`Initial isEnabled state: ${isEnabled}`);
   return (
     <>
       <Switch
@@ -27,11 +23,9 @@ export function Swch() {
         style={style.toggle}
         onValueChange={toggleSwitch}
         value={isEnabled}
-        thumbColor={isEnabled ? 'red' : 'yellow'}
-
+        thumbColor={isEnabled ? '#a49966' : '#C7C7A6'}
       />
     </>
-
   );
 };
 
@@ -43,15 +37,24 @@ const style = StyleSheet.create({
     width: 300,
     height: 100,
     backgroundColor: '#605C4E',
+    justifyContent: 'center',
+    alignItens: 'center',
   },
-  norm: {
 
+  container: {
+    justifyContent: 'center',
+    alignItens: 'center',
   },
+
   clock: {
-    color: '#C7C7A6',
+    color: '#EAFFDA',
     fontSize: 40,
   },
+
   toggle: {
+    marginLeft: 200,
     height: 40,
+    position: 'absolute',
+    top: 30,
   },
 })
