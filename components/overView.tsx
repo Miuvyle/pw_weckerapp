@@ -37,7 +37,7 @@ export function SwitchComponent() {
         style={style.toggle}
         onValueChange={toggleSwitch}
         value={isEnabled}
-        thumbColor={isEnabled ? '#79b791' : '#C7C7A6'}
+        thumbColor={isEnabled ? '#79b791' : '#abd1b5'}
       />
     </>
   );
