@@ -2,11 +2,9 @@ import React from "react";
 import WheelPickerExpo from "react-native-wheel-picker-expo";
 
 
-export function TimePicker(timePick: number) {
-  const n = timePick
-  const myTime = new Array(n).fill(null).map((_, i) => i + 1);
+export function TimePicker({ timePick }) {
 
-  console.log(myTime)
+  let myTime = Array.from({ length: timePick }, (v, k) => k);
   return (
     <WheelPickerExpo
       height={300}
