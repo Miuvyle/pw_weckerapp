@@ -6,9 +6,11 @@ export function TouchableComponent({ givenTime }) {
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
-        <Link href="/Settings" style={style.clock}>{givenTime}</Link>
-      </TouchableOpacity>
-      <SwitchComponent />
+        <View style={style.container}>
+     	<Link href="/Settings" style={style.clock}>{givenTime}</Link>
+	</View>
+     </TouchableOpacity>
+      <SwitchComponent/>
     </View>
   );
 };
@@ -19,12 +21,13 @@ export function SwitchComponent() {
   return (
     <>
       <Switch
-        trackColor={{ false: '#abd1b5', true: '#79b791' }}
+        trackColor={{ false: '#C7C7A6', true: '#a49966' }}
         style={style.toggle}
         onValueChange={toggleSwitch}
         value={isEnabled}
         thumbColor={isEnabled ? '#a49966' : '#C7C7A6'}
       />
+        />
     </>
   );
 };
@@ -49,6 +52,8 @@ const style = StyleSheet.create({
   clock: {
     color: '#EAFFDA',
     fontSize: 40,
+    alignSelf: 'strech',
+    flexGrow: 1,
   },
 
   toggle: {
