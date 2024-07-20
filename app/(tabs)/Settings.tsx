@@ -13,6 +13,8 @@ export default function Setting() {
       <TimePicker
         timePick={24}
       />
+      <View style={baseStyle.divider}>
+      </View>
       <TimePicker
         timePick={60}
       />
@@ -43,6 +45,14 @@ const baseStyle = StyleSheet.create({
 
     backgroundColor: "black",
     color: "white"
+  },
+
+  divider: {
+
+    color: "white",
+    width: 10,
+    height: 100,
+    margin: 20,
   }
 
 
