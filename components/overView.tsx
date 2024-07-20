@@ -25,12 +25,8 @@ export function SwitchComponent() {
         style={style.toggle}
         onValueChange={toggleSwitch}
         value={isEnabled}
-<<<<<<< HEAD
-        thumbColor={isEnabled ? '#79b791' : '#abd1b5'}
-=======
         thumbColor={isEnabled ? '#a49966' : '#C7C7A6'}
       />
->>>>>>> 2c1bb73 (the try to rebase)
         />
     </>
   );
