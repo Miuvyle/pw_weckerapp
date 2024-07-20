@@ -11,10 +11,10 @@ export default function Setting() {
   return (
     <View style={baseStyle.container}>
       <TimePicker
-        timePick={12}
+        timePick={24}
       />
       <TimePicker
-        timePick={12}
+        timePick={60}
       />
     </View>
 
