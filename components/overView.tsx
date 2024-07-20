@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
+
 export function TouchableComponent({ givenTime }){
   const [count, setCount] = useState(0)
   return (
@@ -14,6 +15,17 @@ export function TouchableComponent({ givenTime }){
     </View>
   );
 };
+/*export function CreateButton() {
+  return(
+    <>
+    <TouchableOpacity style={style.container}>
+        <View style={style.createButton}>
+     	<Link href="/Settings">ADD</Link>
+	</View>
+     </TouchableOpacity>
+     </>
+  )
+}*/
 
 export function SwitchComponent() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -25,9 +37,8 @@ export function SwitchComponent() {
         style={style.toggle}
         onValueChange={toggleSwitch}
         value={isEnabled}
-        thumbColor={isEnabled ? '#a49966' : '#C7C7A6'}
+        thumbColor={isEnabled ? '#79b791' : '#C7C7A6'}
       />
-        />
     </>
   );
 };
@@ -42,7 +53,8 @@ const style = StyleSheet.create({
     backgroundColor: '#605C4E',
     justifyContent: 'center',
   },
-
+  createButton: {
+   },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
