@@ -15,17 +15,13 @@ export function TimePicker({ timePick, onTimeChange, initialSelectedIndex }) {
       onChange={({ item }) => onTimeChange(item.label)}
       haptics={true}
       backgroundColor='#605C4E'
+      
     />
 
   )
 
 }
 
-function returnAValue(item) {
-  const label = item.label
-
-  return console.log(label)
-}
 export function SaveButton() {
   return (
     <>
