@@ -43,6 +43,7 @@ export function alarmSet({ componentHours, componentMinutes }) {
   const alarmTime = new Date();
   alarmTime.setHours(componentHours);
   alarmTime.setMinutes(componentMinutes);
+  alarmTime.setSeconds(0);
   if (alarmTime <= currentTime) {
     alarmTime.setDate(alarmTime.getDate() + 1)
   }
