@@ -1,4 +1,4 @@
-import { Alert, Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Alert, Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { TimePicker } from '@/components/CogWheel'
 import React, { useState, useEffect ,useCallback} from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -66,20 +66,18 @@ useEffect(()=> {
         onTimeChange={setMinutes}
         initialSelectedIndex={minutes !== null ? minutes : 0}
       />
-      <TouchableOpacity
-        style={baseStyle.saveButton}
-        onPress={saveTime}>
-        <View>
-          <Text>Save</Text>
-        </View>
-      </TouchableOpacity>
+     <View style={baseStyle.buttons}> 
       <TouchableOpacity
         style={baseStyle.deleteButton}
         onPress={deleteTime}>
-        <View>
-          <Text>delete</Text>
-        </View>
+          <Image  source={require('@/assets/images/DeleteIcon2.png')}/>
       </TouchableOpacity>
+        <TouchableOpacity
+        style={baseStyle.saveButton}
+        onPress={saveTime}>
+          <Image source={require('@/assets/images/SaveIcon2.png')}/>
+      </TouchableOpacity>
+        </View>
     </View>
 
 
@@ -125,11 +123,20 @@ const baseStyle = StyleSheet.create({
     borderRadius: 5,
   },
   deleteButton: {
-    marginTop: 200,
+    alignItems: 'center',
+    marginTop: 20,
     padding: 10,
     backgroundColor: "#605C4E",
     borderRadius: 5,
   },
+ buttons: {
+  position: 'absolute',
+  bottom: 20,
+  left: 20,
+  right: 20,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+ },
 
 
 
