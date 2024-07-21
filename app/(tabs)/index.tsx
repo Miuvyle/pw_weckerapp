@@ -1,6 +1,6 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { TouchableComponent, CreateButton } from "@/components/overView"
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -23,23 +23,27 @@ export default function Index() {
     loadAlarms();
   }, []);
   return (
-    <View
-      style={{
-        flex: 1,
-        //justifyContent: "center",
-        //alignItems: "center",
-        backgroundColor: '#363020'
-      }} >
-        {alarms.map((alarm, index) => (
-      <TouchableComponent
-          key = {index}
-        givenTime={`${alarm.hours}:${alarm.minutes}`} />))}
-      
+    <View style={indexStyle.wrapper}>
+      {alarms.map((alarm, index) => (
+        <TouchableComponent
+          key={index}
+          givenTime={`${alarm.hours}:${alarm.minutes}`} />))}
     </View>
   );
 }
 
+const indexStyle = StyleSheet.create({
+
+  wrapper:
+  {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: '#363020'
+  }
+})
+
 //row: {
- // flexDirection: 'row',
- // flexWrap: 'wrap',
+// flexDirection: 'row',
+// flexWrap: 'wrap',
 //},
