@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
-export function TouchableComponent({ givenTime }){
+export function TouchableComponent({ givenTime }) {
   const [count, setCount] = useState(0)
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
         <View style={style.container}>
-     	<Link href="/Settings" style={style.clock}>{givenTime}</Link>
-	</View>
-     </TouchableOpacity>
-      <SwitchComponent/>
+          <Link href="/Settings" style={style.clock}>{givenTime}</Link>
+        </View>
+      </TouchableOpacity>
+      <SwitchComponent />
     </View>
   );
 };
@@ -20,8 +20,8 @@ export function TouchableComponent({ givenTime }){
     <>
     <TouchableOpacity style={style.container}>
         <View style={style.createButton}>
-     	<Link href="/Settings">ADD</Link>
-	</View>
+        <Link href="/Settings">ADD</Link>
+  </View>
      </TouchableOpacity>
      </>
   )
@@ -54,7 +54,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   createButton: {
-   },
+  },
   container: {
     justifyContent: 'center',
     alignItems: 'center',

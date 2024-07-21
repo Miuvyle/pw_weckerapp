@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { TouchableComponent, CreateButton } from "@/components/overView"
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,10 +24,15 @@ export default function Index() {
   }, []);
   return (
     <View style={indexStyle.wrapper}>
-      {alarms.map((alarm, index) => (
+      <ScrollView>
         <TouchableComponent
-          key={index}
-          givenTime={`${alarm.hours}:${alarm.minutes}`} />))}
+          key={1}
+          givenTime={`${12}:${17}`} />
+        {alarms.map((alarm, index) => (
+          <TouchableComponent
+            key={index}
+            givenTime={`${alarm.hours}:${alarm.minutes}`} />))}
+      </ScrollView>
     </View>
   );
 }
