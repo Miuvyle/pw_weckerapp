@@ -48,7 +48,9 @@ export default function Index() {
 
           if (isSwitchOn(index)) {
             console.log(`Switch at index ${index} is ON`)
-            alarmSet()
+            const timeSetting = { componentHours: alarm.hours, componentMinutes: alarm.minutes }
+            alarmSet(timeSetting)
+            console.log(typeof Number(alarm.hours))
           } else {
             console.log(`Switch at index ${index} is OFF`);
           }

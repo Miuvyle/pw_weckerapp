@@ -7,14 +7,6 @@ import { View, Button, Platform } from 'react-native';
 
 
 export async function scheduleAlarm(trigger) {
-  useEffect(() => {
-    (async () => {
-      const { status } = await Notifications.getPermissionsAsync();
-      if (status !== 'granted') {
-        await Notifications.requestPermissionsAsync();
-      }
-    })();
-  }, []);
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "The Boy who lives!",
@@ -26,6 +18,18 @@ export async function scheduleAlarm(trigger) {
   });
 }
 
+export function getUserPermission() {
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Notifications.getPermissionsAsync();
+      if (status !== 'granted') {
+        await Notifications.requestPermissionsAsync();
+      }
+    })();
+  }, []);
+}
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -34,25 +38,16 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export function alarmSet() {
-  const date = new Date(Date.now() + 10 * 1000);
-  scheduleAlarm(date)
+export function alarmSet({ componentHours, componentMinutes }) {
+  const currentTime = new Date();
+  const alarmTime = new Date();
+  alarmTime.setHours(componentHours);
+  alarmTime.setMinutes(componentMinutes);
+  if (alarmTime <= currentTime) {
+    alarmTime.setDate(alarmTime.getDate() + 1)
+  }
+  console.log(`alarm going off in ${alarmTime}`)
+  scheduleAlarm(alarmTime)
 }
-
-
-export default function Alarm() {
-
-  const handleSetAlarm = () => {
-    const date = new Date(Date.now() + 10 * 1000);
-    scheduleAlarm(date);
-  };
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button title="Set Alarm" onPress={handleSetAlarm} />
-    </View>
-  );
-}
-
 
 
