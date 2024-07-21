@@ -3,12 +3,11 @@ import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
 export function TouchableComponent({ givenTime, href }) {
-  const [count, setCount] = useState(0)
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
         <View style={style.container}>
-          <Link href={href}/*href="/Settings"*/ style={style.clock}>{givenTime}</Link>
+          <Link href={href} style={style.clock}>{givenTime}</Link>
         </View>
       </TouchableOpacity>
       <SwitchComponent />

@@ -1,15 +1,13 @@
 import { Alert, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { TimePicker } from '@/components/CogWheel'
 import React, { useState, useEffect } from "react";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Setting() {
-  const router = useRouter();
-  const { params } = router;
-  console.log(params);
-  const {alarmKey} = params || {};
+  const {alarmKey} = useLocalSearchParams();
+  console.log({alarmKey});
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
 
@@ -17,12 +15,9 @@ export default function Setting() {
     console.log(hours, minutes);
     const fullTime = { hours, minutes };
     const key = alarmKey || `alarm_${Date.now()}`;
-    console.log(key);
-    console.log(fullTime);
 
     try {
       await AsyncStorage.setItem(key, JSON.stringify(fullTime));
-      console.log("jipee");
       Alert.alert("Success", `Alarm saved: ${hours}:${minutes}`);
       router.back();
     } catch (error) {

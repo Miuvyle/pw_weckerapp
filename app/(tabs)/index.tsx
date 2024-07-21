@@ -2,19 +2,24 @@ import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { TouchableComponent } from "@/components/overView"
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from "expo-router";
 import { NavigationContainer } from "@react-navigation/native";
 
 
 export default function Index() {
   const [alarms, setAlarms] = useState([]);
+  const router = useRouter();
 
   const loadAlarms = async () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
       const alarmKeys = keys.filter(key => key.startsWith('alarm_'));
-      const alarmPromises = alarmKeys.map(key => AsyncStorage.getItem(key));
-      const alarmValues = await Promise.all(alarmPromises);
-      const loadedAlarms = alarmValues.map(value => JSON.parse(value));
+      const alarmPromises = alarmKeys.map(async key => {
+        const value = await AsyncStorage.getItem(key);
+        const alarm = JSON.parse(value);
+        return { ...alarm, key }; 
+      });
+      const loadedAlarms = await Promise.all(alarmPromises);
       setAlarms(loadedAlarms);
     } catch (error) {
       console.log("AsyncStorage Error", error);
@@ -22,15 +27,16 @@ export default function Index() {
   };
   useEffect(() => {
     loadAlarms();
-  }, []);
+     }, []);
   return (
     <View style={indexStyle.wrapper}>
       <ScrollView>
-        {alarms.map((alarm, index) => (
+        {alarms.map((alarm, index) => {
+          return(
           <TouchableComponent
             key={index}
             href={{ pathname: '(tabs)/Settings', params: {alarmKey: alarm.key}}}
-            givenTime={`${alarm.hours}:${alarm.minutes}`} />))}
+            givenTime={`${alarm.hours}:${alarm.minutes}`} />);})}
       </ScrollView>
     </View>
   );
@@ -46,8 +52,3 @@ const indexStyle = StyleSheet.create({
     backgroundColor: '#363020'
   }
 })
-
-//row: {
-// flexDirection: 'row',
-// flexWrap: 'wrap',
-//},
