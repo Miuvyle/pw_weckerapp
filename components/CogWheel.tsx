@@ -4,13 +4,13 @@ import WheelPickerExpo from "react-native-wheel-picker-expo";
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
 
-export function TimePicker({ timePick, onTimeChange }) {
+export function TimePicker({ timePick, onTimeChange, initialSelectedIndex }) {
   let myTime = Array.from({ length: timePick }, (v, k) => k);
   return (
     <WheelPickerExpo
       height={300}
       width={150}
-      initialSelectedIndex={3}
+      initialSelectedIndex={initialSelectedIndex }
       items={myTime.map(name => ({ label: name.toString(), value: '' }))}
       onChange={({ item }) => onTimeChange(item.label)}
       haptics={true}

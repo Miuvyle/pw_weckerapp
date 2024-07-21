@@ -1,17 +1,22 @@
 import { Alert, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { TimePicker } from '@/components/CogWheel'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Setting() {
+  const router = useRouter();
+  const { params } = router;
+  console.log(params);
+  const {alarmKey} = params || {};
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
 
   const saveTime = async () => {
     console.log(hours, minutes);
     const fullTime = { hours, minutes };
-    const key = `alarm_${Date.now()}`;
+    const key = alarmKey || `alarm_${Date.now()}`;
     console.log(key);
     console.log(fullTime);
 
@@ -19,6 +24,7 @@ export default function Setting() {
       await AsyncStorage.setItem(key, JSON.stringify(fullTime));
       console.log("jipee");
       Alert.alert("Success", `Alarm saved: ${hours}:${minutes}`);
+      router.back();
     } catch (error) {
       console.log("Async Error");
     }
@@ -33,19 +39,24 @@ export default function Setting() {
       console.log("Async Error")
     }
   };
-
+useEffect(()=> {
+  if (alarmKey) {
+  loadTime(alarmKey);}
+}, [alarmKey]);
 
   return (
     <View style={baseStyle.container}>
       <TimePicker
         timePick={24}
         onTimeChange={setHours}
+        initialSelectedIndex={hours !== null ? hours : 0}
       />
       <View style={baseStyle.divider}>
       </View>
       <TimePicker
         timePick={60}
         onTimeChange={setMinutes}
+        initialSelectedIndex={minutes !== null ? minutes : 0}
       />
       <TouchableOpacity
         style={baseStyle.saveButton}

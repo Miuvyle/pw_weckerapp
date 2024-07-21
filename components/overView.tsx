@@ -2,30 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
-export function TouchableComponent({ givenTime }) {
+export function TouchableComponent({ givenTime, href }) {
   const [count, setCount] = useState(0)
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
         <View style={style.container}>
-          <Link href="/Settings" style={style.clock}>{givenTime}</Link>
+          <Link href={href}/*href="/Settings"*/ style={style.clock}>{givenTime}</Link>
         </View>
       </TouchableOpacity>
       <SwitchComponent />
     </View>
   );
 };
-/*export function CreateButton() {
-  return(
-    <>
-    <TouchableOpacity style={style.container}>
-        <View style={style.createButton}>
-        <Link href="/Settings">ADD</Link>
-  </View>
-     </TouchableOpacity>
-     </>
-  )
-}*/
 
 export function SwitchComponent() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -59,6 +48,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
+    padding: 5,
   },
 
   clock: {

@@ -1,7 +1,8 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { TouchableComponent, CreateButton } from "@/components/overView"
+import { TouchableComponent } from "@/components/overView"
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from "@react-navigation/native";
 
 
 export default function Index() {
@@ -25,12 +26,10 @@ export default function Index() {
   return (
     <View style={indexStyle.wrapper}>
       <ScrollView>
-        <TouchableComponent
-          key={1}
-          givenTime={`${12}:${17}`} />
         {alarms.map((alarm, index) => (
           <TouchableComponent
             key={index}
+            href={{ pathname: '(tabs)/Settings', params: {alarmKey: alarm.key}}}
             givenTime={`${alarm.hours}:${alarm.minutes}`} />))}
       </ScrollView>
     </View>
