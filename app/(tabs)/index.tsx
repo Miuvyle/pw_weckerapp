@@ -10,6 +10,7 @@ export default function Index() {
   const [alarms, setAlarms] = useState([]);
   const router = useRouter();
 
+  const [switchStates, setSwitchStates] = useState({});
   const loadAlarms = async () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
@@ -17,7 +18,7 @@ export default function Index() {
       const alarmPromises = alarmKeys.map(async key => {
         const value = await AsyncStorage.getItem(key);
         const alarm = JSON.parse(value);
-        return { ...alarm, key }; 
+        return { ...alarm, key };
       });
       const loadedAlarms = await Promise.all(alarmPromises);
       setAlarms(loadedAlarms);
@@ -27,16 +28,27 @@ export default function Index() {
   };
   useEffect(() => {
     loadAlarms();
-     }, []);
+  }, []);
+  const toggleSwitch = (index) => {
+    setSwitchStates((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
   return (
     <View style={indexStyle.wrapper}>
       <ScrollView>
         {alarms.map((alarm, index) => {
-          return(
-          <TouchableComponent
-            key={index}
-            href={{ pathname: '(tabs)/Settings', params: {alarmKey: alarm.key}}}
-            givenTime={`${alarm.hours}:${alarm.minutes}`} />);})}
+          return (
+            <TouchableComponent
+              key={index}
+              href={{ pathname: '(tabs)/Settings', params: { alarmKey: alarm.key } }}
+              givenTime={`${alarm.hours}:${alarm.minutes}`}
+              currentKey={index}
+              onToggleSwitch={() => toggleSwitch(index)}
+              currentState={switchStates[index] || false}
+            />);
+        })}
       </ScrollView>
     </View>
   );

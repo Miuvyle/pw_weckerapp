@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
-export function TouchableComponent({ givenTime, href }) {
+export function TouchableComponent({ currentState, givenTime, href, currentKey, onToggleSwitch }) {
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
@@ -10,22 +10,28 @@ export function TouchableComponent({ givenTime, href }) {
           <Link href={href} style={style.clock}>{givenTime}</Link>
         </View>
       </TouchableOpacity>
-      <SwitchComponent />
+      <SwitchComponent
+        alarmIndex={currentKey}
+        onToggleSwitch={onToggleSwitch}
+        currentState={currentState}
+      />
     </View>
   );
 };
 
-export function SwitchComponent() {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+export function SwitchComponent({ alarmIndex, onToggleSwitch, currentState }) {
+  const toggleSwitch = () => {
+    onToggleSwitch();
+  };
+
   return (
     <>
       <Switch
         trackColor={{ false: '#C7C7A6', true: '#a49966' }}
         style={style.toggle}
         onValueChange={toggleSwitch}
-        value={isEnabled}
-        thumbColor={isEnabled ? '#79b791' : '#abd1b5'}
+        value={currentState}
+        thumbColor={currentState ? '#79b791' : '#abd1b5'}
       />
     </>
   );
