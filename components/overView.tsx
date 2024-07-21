@@ -11,6 +11,7 @@ export function TouchableComponent({ currentState, givenTime, href, currentKey, 
         </View>
       </TouchableOpacity>
       <SwitchComponent
+        style={style.toggle}
         alarmIndex={currentKey}
         onToggleSwitch={onToggleSwitch}
         currentState={currentState}
@@ -66,7 +67,6 @@ const style = StyleSheet.create({
   },
   container: {
     justifyContent: 'center',
-    alignItems: 'center',
     alignSelf: 'stretch',
     padding: 5,
   },
