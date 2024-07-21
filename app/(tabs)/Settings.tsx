@@ -1,6 +1,6 @@
 import { Alert, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { TimePicker } from '@/components/CogWheel'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useCallback} from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -16,13 +16,14 @@ export default function Setting() {
     console.log(hours, minutes);
     const fullTime = { hours, minutes };
     const key = alarmKey || `alarm_${Date.now()}`;
+    console.log(key);
 
     try {
       await AsyncStorage.setItem(key, JSON.stringify(fullTime));
       Alert.alert("Success", `Alarm saved: ${hours}:${minutes}`);
       router.back();
     } catch (error) {
-      console.log("Async Error");
+      console.log("Save Error");
     }
   };
   const loadTime = async (key) => {
@@ -32,7 +33,18 @@ export default function Setting() {
       setHours(hours);
       setMinutes(minutes);
     } catch (error) {
-      console.log("Async Error")
+      console.log("Load Error")
+    }
+  } ;
+
+  const deleteTime = async () => {
+    try{
+      console.log(`HHAHAHA ${alarmKey}`)
+      const item = await AsyncStorage.removeItem(alarmKey);
+      console.log('Item after removal:', item); 
+      router.back();
+    } catch (error){
+      console.log("Deletion error")
     }
   };
 useEffect(()=> {
@@ -59,6 +71,13 @@ useEffect(()=> {
         onPress={saveTime}>
         <View>
           <Text>Save</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={baseStyle.deleteButton}
+        onPress={deleteTime}>
+        <View>
+          <Text>delete</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -104,7 +123,13 @@ const baseStyle = StyleSheet.create({
     padding: 10,
     backgroundColor: "#605C4E",
     borderRadius: 5,
-  }
+  },
+  deleteButton: {
+    marginTop: 200,
+    padding: 10,
+    backgroundColor: "#605C4E",
+    borderRadius: 5,
+  },
 
 
 

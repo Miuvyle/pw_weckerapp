@@ -1,12 +1,9 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import Alarm from "@/components/alarmComponent";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from "expo-router";
-import { scheduleAlarm, alarmSet } from "@/components/alarmComponent";
-import { NavigationContainer } from "@react-navigation/native";
-import { useFocusEffect } from "@react-navigation/native";
 import { AddButton, TouchableComponent } from "@/components/overView"
 import React, { useState, useCallback } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {  useRouter } from "expo-router";
+import { useFocusEffect} from "@react-navigation/native";
 
 
 export default function Index() {
@@ -31,30 +28,18 @@ export default function Index() {
   };
   useFocusEffect(
     useCallback(() => {
-      loadAlarms();
-    }, []));
+    loadAlarms();
+  }, []));
   const toggleSwitch = (index) => {
     setSwitchStates((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
     }));
   };
-
-  const isSwitchOn = (index: number) => switchStates[index] || false;
-
   return (
-    <View style={indexStyle.wrapper}>
+    <View  style={indexStyle.wrapper}>
       <ScrollView>
         {alarms.map((alarm, index) => {
-
-          if (isSwitchOn(index)) {
-            console.log(`Switch at index ${index} is ON`)
-            const timeSetting = { componentHours: alarm.hours, componentMinutes: alarm.minutes }
-            alarmSet(timeSetting)
-            console.log(typeof Number(alarm.hours))
-          } else {
-            console.log(`Switch at index ${index} is OFF`);
-          }
           return (
             <TouchableComponent
               key={index}
@@ -64,10 +49,10 @@ export default function Index() {
               onToggleSwitch={() => toggleSwitch(index)}
               currentState={switchStates[index] || false}
             />
-          );
+);
         })}
       </ScrollView>
-      <AddButton />
+      <AddButton/>
     </View>
   );
 }
@@ -82,4 +67,3 @@ const indexStyle = StyleSheet.create({
     backgroundColor: '#363020'
   }
 })
-
