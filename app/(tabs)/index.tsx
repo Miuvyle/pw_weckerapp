@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { TouchableComponent } from "@/components/overView"
+import { AddButton, TouchableComponent } from "@/components/overView"
 import React, { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {  useRouter } from "expo-router";
@@ -48,9 +48,11 @@ export default function Index() {
               currentKey={index}
               onToggleSwitch={() => toggleSwitch(index)}
               currentState={switchStates[index] || false}
-            />);
+            />
+);
         })}
       </ScrollView>
+      <AddButton/>
     </View>
   );
 }

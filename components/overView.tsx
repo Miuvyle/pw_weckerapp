@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'expo-router';
-import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
+import { Link ,useRouter} from 'expo-router';
+import { Switch, TouchableOpacity, Text, View, StyleSheet, Image } from "react-native";
 
 export function TouchableComponent({ currentState, givenTime, href, currentKey, onToggleSwitch }) {
   return (
@@ -37,6 +37,17 @@ export function SwitchComponent({ alarmIndex, onToggleSwitch, currentState }) {
   );
 };
 
+export function AddButton(){
+  const router = useRouter();
+  return (
+    <TouchableOpacity onPress={() => router.push({ pathname: '(tabs)/Settings' })} >
+      <View styles={style.createButton}>
+        <Image styles={style.img} source={require('../assets/images/plusIcon.png')}/>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 const style = StyleSheet.create({
   button: {
     borderRadius: 10,
@@ -48,6 +59,10 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   createButton: {
+    borderRadius: 100,
+    position: 'absolute',
+    top: 0,
+
   },
   container: {
     justifyContent: 'center',
@@ -61,6 +76,9 @@ const style = StyleSheet.create({
     fontSize: 40,
     alignSelf: 'stretch',
     flexGrow: 1,
+  },
+  img: {
+    borderRadius: 100,
   },
 
   toggle: {
