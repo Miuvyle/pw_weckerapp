@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'expo-router';
 import { Switch, TouchableOpacity, Text, View, StyleSheet } from "react-native";
+
 export function TouchableComponent({ givenTime }) {
   const [count, setCount] = useState(0)
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
         <View style={style.container}>
-     	<Link href="/Settings" style={style.clock}>{givenTime}</Link>
-	</View>
-     </TouchableOpacity>
-      <SwitchComponent/>
+          <Link href="/Settings" style={style.clock}>{givenTime}</Link>
+        </View>
+      </TouchableOpacity>
+      <SwitchComponent />
     </View>
   );
 };
+/*export function CreateButton() {
+  return(
+    <>
+    <TouchableOpacity style={style.container}>
+        <View style={style.createButton}>
+        <Link href="/Settings">ADD</Link>
+  </View>
+     </TouchableOpacity>
+     </>
+  )
+}*/
 
 export function SwitchComponent() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -25,9 +37,8 @@ export function SwitchComponent() {
         style={style.toggle}
         onValueChange={toggleSwitch}
         value={isEnabled}
-        thumbColor={isEnabled ? '#a49966' : '#C7C7A6'}
+        thumbColor={isEnabled ? '#79b791' : '#abd1b5'}
       />
-        />
     </>
   );
 };
@@ -41,18 +52,19 @@ const style = StyleSheet.create({
     height: 100,
     backgroundColor: '#605C4E',
     justifyContent: 'center',
-    alignItens: 'center',
   },
-
+  createButton: {
+  },
   container: {
     justifyContent: 'center',
-    alignItens: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
   },
 
   clock: {
     color: '#EAFFDA',
     fontSize: 40,
-    alignSelf: 'strech',
+    alignSelf: 'stretch',
     flexGrow: 1,
   },
 
@@ -60,6 +72,6 @@ const style = StyleSheet.create({
     marginLeft: 200,
     height: 40,
     position: 'absolute',
-    top: 30,
+    transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }]
   },
 })
