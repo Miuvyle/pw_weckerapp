@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Setting() {
   const {alarmKey} = useLocalSearchParams();
   console.log({alarmKey});
+  const router = useRouter();
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
 

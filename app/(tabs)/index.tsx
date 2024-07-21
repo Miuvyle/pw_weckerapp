@@ -1,16 +1,16 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { TouchableComponent } from "@/components/overView"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from "expo-router";
-import { NavigationContainer } from "@react-navigation/native";
+import {  useRouter } from "expo-router";
+import { useFocusEffect} from "@react-navigation/native";
 
 
 export default function Index() {
   const [alarms, setAlarms] = useState([]);
   const router = useRouter();
-
   const [switchStates, setSwitchStates] = useState({});
+
   const loadAlarms = async () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
@@ -26,9 +26,10 @@ export default function Index() {
       console.log("AsyncStorage Error", error);
     }
   };
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     loadAlarms();
-  }, []);
+  }, []));
   const toggleSwitch = (index) => {
     setSwitchStates((prevState) => ({
       ...prevState,
@@ -36,7 +37,7 @@ export default function Index() {
     }));
   };
   return (
-    <View style={indexStyle.wrapper}>
+    <View  style={indexStyle.wrapper}>
       <ScrollView>
         {alarms.map((alarm, index) => {
           return (
