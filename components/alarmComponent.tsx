@@ -34,11 +34,12 @@ Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
-    shouldSetBadge: false,
+    shouldSetBadge: true,
   }),
 });
 
-export function alarmSet({ componentHours, componentMinutes }) {
+export function alarmSet({ componentHours, componentMinutes, theKey }) {
+  console.log(`Hours: ${componentHours} and Minutes: ${componentMinutes} and key: ${theKey}`)
   const currentTime = new Date();
   const alarmTime = new Date();
   alarmTime.setHours(componentHours);

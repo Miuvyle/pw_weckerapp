@@ -2,8 +2,9 @@ import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { AddButton, TouchableComponent } from "@/components/overView"
 import React, { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {  useRouter } from "expo-router";
-import { useFocusEffect} from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
+import { alarmSet } from "@/components/alarmComponent";
 
 
 export default function Index() {
@@ -28,8 +29,8 @@ export default function Index() {
   };
   useFocusEffect(
     useCallback(() => {
-    loadAlarms();
-  }, []));
+      loadAlarms();
+    }, []));
   const toggleSwitch = (index) => {
     setSwitchStates((prevState) => ({
       ...prevState,
@@ -37,9 +38,16 @@ export default function Index() {
     }));
   };
   return (
-    <View  style={indexStyle.wrapper}>
+    <View style={indexStyle.wrapper}>
       <ScrollView>
         {alarms.map((alarm, index) => {
+          if (switchStates[index]) {
+            console.log("It is true you sad loser")
+            alarmSet({ componentHours: alarm.hours, componentMinutes: alarm.minutes, theKey: alarm.key })
+          }
+          else {
+            console.log('You loser, it is wrong')
+          }
           return (
             <TouchableComponent
               key={index}
@@ -49,10 +57,10 @@ export default function Index() {
               onToggleSwitch={() => toggleSwitch(index)}
               currentState={switchStates[index] || false}
             />
-);
+          );
         })}
       </ScrollView>
-      <AddButton/>
+      <AddButton />
     </View>
   );
 }
