@@ -1,8 +1,10 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { TouchableComponent } from "@/components/overView"
+import Alarm from "@/components/alarmComponent";
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
+import { scheduleAlarm, alarmSet } from "@/components/alarmComponent";
 import { NavigationContainer } from "@react-navigation/native";
 
 
@@ -29,16 +31,27 @@ export default function Index() {
   useEffect(() => {
     loadAlarms();
   }, []);
+
   const toggleSwitch = (index) => {
     setSwitchStates((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
     }));
   };
+
+  const isSwitchOn = (index: number) => switchStates[index] || false;
+
   return (
     <View style={indexStyle.wrapper}>
       <ScrollView>
         {alarms.map((alarm, index) => {
+
+          if (isSwitchOn(index)) {
+            console.log(`Switch at index ${index} is ON`)
+            alarmSet()
+          } else {
+            console.log(`Switch at index ${index} is OFF`);
+          }
           return (
             <TouchableComponent
               key={index}
@@ -64,3 +77,4 @@ const indexStyle = StyleSheet.create({
     backgroundColor: '#363020'
   }
 })
+
