@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { TouchableComponent } from "@/components/overView"
 import Alarm from "@/components/alarmComponent";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
 import { scheduleAlarm, alarmSet } from "@/components/alarmComponent";
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useState, useCallback } from 'react';
 import { useFocusEffect } from "@react-navigation/native";
+import { AddButton, TouchableComponent } from "@/components/overView"
+import React, { useState, useCallback } from 'react';
 
 
 export default function Index() {
@@ -63,9 +63,11 @@ export default function Index() {
               currentKey={index}
               onToggleSwitch={() => toggleSwitch(index)}
               currentState={switchStates[index] || false}
-            />);
+            />
+          );
         })}
       </ScrollView>
+      <AddButton />
     </View>
   );
 }
