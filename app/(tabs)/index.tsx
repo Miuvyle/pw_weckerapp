@@ -1,18 +1,19 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { TouchableComponent } from "@/components/overView"
 import Alarm from "@/components/alarmComponent";
-import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
 import { scheduleAlarm, alarmSet } from "@/components/alarmComponent";
 import { NavigationContainer } from "@react-navigation/native";
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from "@react-navigation/native";
 
 
 export default function Index() {
   const [alarms, setAlarms] = useState([]);
   const router = useRouter();
-
   const [switchStates, setSwitchStates] = useState({});
+
   const loadAlarms = async () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
@@ -28,10 +29,10 @@ export default function Index() {
       console.log("AsyncStorage Error", error);
     }
   };
-  useEffect(() => {
-    loadAlarms();
-  }, []);
-
+  useFocusEffect(
+    useCallback(() => {
+      loadAlarms();
+    }, []));
   const toggleSwitch = (index) => {
     setSwitchStates((prevState) => ({
       ...prevState,
