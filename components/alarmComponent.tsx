@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import * as Notifications from 'expo-notifications';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
-
-export async function scheduleAlarm(trigger) {
+export async function scheduleAlarm(trigger, theKey) {
   const notificationID = await Notifications.scheduleNotificationAsync({
     content: {
       title: "The Boy who lives!",
@@ -14,8 +14,17 @@ export async function scheduleAlarm(trigger) {
     },
     trigger,
   });
-  console.log(notificationID)
-  return (notificationID)
+  await AsyncStorage.setItem(`alarm:${theKey}`, notificationID)
+}
+
+export async function cancelAlarm(theKey) {
+  const notificationID = await AsyncStorage.getItem(`alarm:${theKey}`);
+  if (notificationID) {
+    await Notifications.cancelScheduledNotificationAsync(notificationID)
+    await AsyncStorage.removeItem(`alarm:${theKey}`)
+
+  }
+
 }
 
 export function getUserPermission() {
@@ -38,7 +47,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export function alarmSet({ componentHours, componentMinutes }) {
+export function alarmSet({ componentHours, componentMinutes, theKey }) {
   console.log(`Hours: ${componentHours} and Minutes: ${componentMinutes}`)
   const currentTime = new Date();
   const alarmTime = new Date();
@@ -48,10 +57,8 @@ export function alarmSet({ componentHours, componentMinutes }) {
   if (alarmTime <= currentTime) {
     alarmTime.setDate(alarmTime.getDate() + 1)
   }
-  console.log(`alarm going off in ${alarmTime}`)
-  const scheduleId = scheduleAlarm(alarmTime)
-  console.log(scheduleId)
-  return (scheduleId)
+  console.log(`alarm with the key ${theKey}, going off in ${alarmTime}`)
+  scheduleAlarm(alarmTime, theKey)
 }
 
 

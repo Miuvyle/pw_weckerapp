@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
-import { alarmSet } from "@/components/alarmComponent";
+import { alarmSet, cancelAlarm } from "@/components/alarmComponent";
 
 
 export default function Index() {
@@ -43,10 +43,11 @@ export default function Index() {
         {alarms.map((alarm, index) => {
           console.log(typeof switchStates)
           if (switchStates[index]) {
-            console.log(alarmSet({ componentHours: alarm['hours'], componentMinutes: alarm['minutes'] }))
+            alarmSet({ componentHours: alarm['hours'], componentMinutes: alarm['minutes'], theKey: alarm[`key`] })
           }
           else {
-            console.log('You loser, it is wrong')
+            cancelAlarm(alarm['key'])
+            console.log(`Alarm with the ID ${alarm[`key`]} was canceled`)
           }
           return (
             <TouchableComponent
