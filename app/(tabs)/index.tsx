@@ -8,6 +8,8 @@ import { alarmSet, cancelAlarm } from "@/components/alarmComponent";
 
 
 export default function Index() {
+
+  // #region
   const [alarms, setAlarms] = useState([]);
   const router = useRouter();
   const [switchStates, setSwitchStates] = useState({});
@@ -37,11 +39,21 @@ export default function Index() {
       [index]: !prevState[index],
     }));
   };
+  // #endregion
+
   return (
+    /* Füge ein "View" ein um der App eine Grundstruktur zu geben.*/
     <View style={indexStyle.wrapper}>
       <ScrollView>
+        {/*Verwende alarm.map um durch die ganzen gesetzten Urhzeiten zu iterrieren
+        Zur hilfe schau auf die website
+        https://www.digitalocean.com/community/tutorials/4-uses-of-javascripts-arraymap-you-should-know-de */}
         {alarms.map((alarm, index) => {
           console.log(typeof switchStates)
+          {/* Erstelle eine If-Funktion um herauszufinden, ob der aktuelle Schalter an oder aus ist und führe die dafür
+        vorgesehene Funktion aus (alarmSet({}) / cancelAlarm({}))
+        https://michaelkipp.de/processing/if.html
+        */}
           if (switchStates[index]) {
             alarmSet({ componentHours: alarm['hours'], componentMinutes: alarm['minutes'], theKey: alarm[`key`] })
           }
@@ -49,7 +61,16 @@ export default function Index() {
             cancelAlarm(alarm['key'])
             console.log(`Alarm with the ID ${alarm[`key`]} was canceled`)
           }
+
           return (
+            /*Erstelle die Komponente, die den User-Input regrestriert
+             * TouchableComponent 
+             * key=
+             * href=
+             * givenTime=
+             * currentKey=
+             * onToggleSwitch={()=> toggleSwitch(index)}
+             * currentState=*/
             <TouchableComponent
               key={index}
               href={{ pathname: '(tabs)/Settings', params: { alarmKey: alarm['key'] } }}
