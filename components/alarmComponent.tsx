@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import * as Notifications from 'expo-notifications';
-import * as Taskmanager from 'expo-task-manager';
-import { View, Button, Platform } from 'react-native';
 
 
 
 
 export async function scheduleAlarm(trigger) {
-  await Notifications.scheduleNotificationAsync({
+  const notificationID = await Notifications.scheduleNotificationAsync({
     content: {
       title: "The Boy who lives!",
       body: "Come to diiiiee!",
@@ -16,6 +14,8 @@ export async function scheduleAlarm(trigger) {
     },
     trigger,
   });
+  console.log(notificationID)
+  return (notificationID)
 }
 
 export function getUserPermission() {
@@ -38,8 +38,8 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export function alarmSet({ componentHours, componentMinutes, theKey }) {
-  console.log(`Hours: ${componentHours} and Minutes: ${componentMinutes} and key: ${theKey}`)
+export function alarmSet({ componentHours, componentMinutes }) {
+  console.log(`Hours: ${componentHours} and Minutes: ${componentMinutes}`)
   const currentTime = new Date();
   const alarmTime = new Date();
   alarmTime.setHours(componentHours);
@@ -49,7 +49,9 @@ export function alarmSet({ componentHours, componentMinutes, theKey }) {
     alarmTime.setDate(alarmTime.getDate() + 1)
   }
   console.log(`alarm going off in ${alarmTime}`)
-  scheduleAlarm(alarmTime)
+  const scheduleId = scheduleAlarm(alarmTime)
+  console.log(scheduleId)
+  return (scheduleId)
 }
 
 

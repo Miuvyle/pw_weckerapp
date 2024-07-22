@@ -41,9 +41,9 @@ export default function Index() {
     <View style={indexStyle.wrapper}>
       <ScrollView>
         {alarms.map((alarm, index) => {
+          console.log(typeof switchStates)
           if (switchStates[index]) {
-            console.log("It is true you sad loser")
-            alarmSet({ componentHours: alarm.hours, componentMinutes: alarm.minutes, theKey: alarm.key })
+            console.log(alarmSet({ componentHours: alarm['hours'], componentMinutes: alarm['minutes'] }))
           }
           else {
             console.log('You loser, it is wrong')
@@ -51,8 +51,8 @@ export default function Index() {
           return (
             <TouchableComponent
               key={index}
-              href={{ pathname: '(tabs)/Settings', params: { alarmKey: alarm.key } }}
-              givenTime={`${alarm.hours}:${alarm.minutes}`}
+              href={{ pathname: '(tabs)/Settings', params: { alarmKey: alarm['key'] } }}
+              givenTime={`${alarm['hours']}:${alarm['minutes']}`}
               currentKey={index}
               onToggleSwitch={() => toggleSwitch(index)}
               currentState={switchStates[index] || false}

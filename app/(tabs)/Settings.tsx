@@ -1,13 +1,13 @@
 import { Alert, Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { TimePicker } from '@/components/CogWheel'
-import React, { useState, useEffect ,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Setting() {
-  const {alarmKey} = useLocalSearchParams();
-  console.log({alarmKey});
+  const { alarmKey } = useLocalSearchParams();
+  console.log({ alarmKey });
   const router = useRouter();
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
@@ -35,22 +35,23 @@ export default function Setting() {
     } catch (error) {
       console.log("Load Error")
     }
-  } ;
+  };
 
   const deleteTime = async () => {
-    try{
+    try {
       console.log(`HHAHAHA ${alarmKey}`)
       const item = await AsyncStorage.removeItem(alarmKey);
-      console.log('Item after removal:', item); 
+      console.log('Item after removal:', item);
       router.back();
-    } catch (error){
+    } catch (error) {
       console.log("Deletion error")
     }
   };
-useEffect(()=> {
-  if (alarmKey) {
-  loadTime(alarmKey);}
-}, [alarmKey]);
+  useEffect(() => {
+    if (alarmKey) {
+      loadTime(alarmKey);
+    }
+  }, [alarmKey]);
 
   return (
     <View style={baseStyle.container}>
@@ -66,18 +67,18 @@ useEffect(()=> {
         onTimeChange={setMinutes}
         initialSelectedIndex={minutes !== null ? minutes : 0}
       />
-     <View style={baseStyle.buttons}> 
-      <TouchableOpacity
-        style={baseStyle.deleteButton}
-        onPress={deleteTime}>
-          <Image  source={require('@/assets/images/DeleteIcon2.png')}/>
-      </TouchableOpacity>
+      <View style={baseStyle.buttons}>
         <TouchableOpacity
-        style={baseStyle.saveButton}
-        onPress={saveTime}>
-          <Image source={require('@/assets/images/SaveIcon2.png')}/>
-      </TouchableOpacity>
-        </View>
+          style={baseStyle.deleteButton}
+          onPress={deleteTime}>
+          <Image source={require('@/assets/images/DeleteIcon2.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={baseStyle.saveButton}
+          onPress={saveTime}>
+          <Image source={require('@/assets/images/SaveIcon2.png')} />
+        </TouchableOpacity>
+      </View>
     </View>
 
 
@@ -129,14 +130,14 @@ const baseStyle = StyleSheet.create({
     backgroundColor: "#605C4E",
     borderRadius: 5,
   },
- buttons: {
-  position: 'absolute',
-  bottom: 20,
-  left: 20,
-  right: 20,
-  flexDirection: 'row',
-  justifyContent: 'space-between',
- },
+  buttons: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 
 
 
