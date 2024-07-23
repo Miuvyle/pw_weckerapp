@@ -6,6 +6,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Setting() {
+
+  // #region
   const { alarmKey } = useLocalSearchParams();
   console.log({ alarmKey });
   const router = useRouter();
@@ -53,34 +55,22 @@ export default function Setting() {
     }
   }, [alarmKey]);
 
-  return (
-    <View style={baseStyle.container}>
-      <TimePicker
-        timePick={24}
-        onTimeChange={setHours}
-        initialSelectedIndex={hours !== null ? hours : 0}
-      />
-      <View style={baseStyle.divider}>
-      </View>
-      <TimePicker
-        timePick={60}
-        onTimeChange={setMinutes}
-        initialSelectedIndex={minutes !== null ? minutes : 0}
-      />
-      <View style={baseStyle.buttons}>
-        <TouchableOpacity
-          style={baseStyle.deleteButton}
-          onPress={deleteTime}>
-          <Image source={require('@/assets/images/DeleteIcon2.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={baseStyle.saveButton}
-          onPress={saveTime}>
-          <Image source={require('@/assets/images/SaveIcon2.png')} />
-        </TouchableOpacity>
-      </View>
-    </View>
+  // #endregion
 
+
+
+  return (
+    <View>Das ist die Settings page wo euer Code steht!</View>
+    //wrapper 
+    //ZeitWaehl Compnent fuer die Stunden
+    //Styling Element
+    //ZeitWaehl Component fuer die minuten
+    //Styling wrapper Knoepfe
+    //LoeschenKnopf
+    //Bild fuer den Loeschen LoeschenKnopf
+    //SpeicherKnopf
+    //Bild fuer SpeichernKnopf
+    // !!wrapper schliessen nicht vergessen?
 
   );
 
@@ -88,7 +78,7 @@ export default function Setting() {
 }
 
 
-
+// #region
 
 
 const baseStyle = StyleSheet.create({
@@ -138,7 +128,7 @@ const baseStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
+  // #endregion
 
 
 })

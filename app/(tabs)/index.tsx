@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { AddButton, TouchableComponent } from "@/components/overView"
 import React, { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { alarmSet, cancelAlarm } from "@/components/alarmComponent";
 
@@ -46,7 +46,7 @@ export default function Index() {
     <View style={indexStyle.wrapper}>
       <ScrollView>
 
-        <Text style={indexStyle.startingText}> Hier beginnt die App, öffne die index.tsx Datei </Text>
+        <Link href="/Settings" style={indexStyle.startingText}> Hier beginnt die App, öffne die Settings.tsx Datei und klicke hier um deine Änderungen zu sehen </Link>
         {/*Verwende alarm.map um durch die ganzen gesetzten Urhzeiten zu iterrieren
         Zur hilfe schau auf die website
         https://www.digitalocean.com/community/tutorials/4-uses-of-javascripts-arraymap-you-should-know-de */}
@@ -80,7 +80,8 @@ const indexStyle = StyleSheet.create({
   startingText: {
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'white'
+    color: 'white',
+    fontSize: 36
   }
 
 })
