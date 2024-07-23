@@ -45,44 +45,25 @@ export default function Index() {
     /* Füge ein "View" ein um der App eine Grundstruktur zu geben.*/
     <View style={indexStyle.wrapper}>
       <ScrollView>
+
+        <Text style={indexStyle.startingText}> Hier beginnt die App, öffne die index.tsx Datei </Text>
         {/*Verwende alarm.map um durch die ganzen gesetzten Urhzeiten zu iterrieren
         Zur hilfe schau auf die website
         https://www.digitalocean.com/community/tutorials/4-uses-of-javascripts-arraymap-you-should-know-de */}
-        {alarms.map((alarm, index) => {
-          console.log(typeof switchStates)
-          {/* Erstelle eine If-Funktion um herauszufinden, ob der aktuelle Schalter an oder aus ist und führe die dafür
+        {/* Erstelle eine If-Funktion um herauszufinden, ob der aktuelle Schalter an oder aus ist und führe die dafür
         vorgesehene Funktion aus (alarmSet({}) / cancelAlarm({}))
         https://michaelkipp.de/processing/if.html
         */}
-          if (switchStates[index]) {
-            alarmSet({ componentHours: alarm['hours'], componentMinutes: alarm['minutes'], theKey: alarm[`key`] })
-          }
-          else {
-            cancelAlarm(alarm['key'])
-            console.log(`Alarm with the ID ${alarm[`key`]} was canceled`)
-          }
 
-          return (
-            /*Erstelle die Komponente, die den User-Input regrestriert
-             * TouchableComponent 
+        {/*Erstelle die Komponente, die den User-Input regrestriert
+             * TouchableComponent
              * key=
              * href=
              * givenTime=
              * currentKey=
-             * onToggleSwitch={()=> toggleSwitch(index)}
-             * currentState=*/
-            <TouchableComponent
-              key={index}
-              href={{ pathname: '(tabs)/Settings', params: { alarmKey: alarm['key'] } }}
-              givenTime={`${alarm['hours']}:${alarm['minutes']}`}
-              currentKey={index}
-              onToggleSwitch={() => toggleSwitch(index)}
-              currentState={switchStates[index] || false}
-            />
-          );
-        })}
+             * onToggleSwitch={() => toggleSwitch(index)}
+              * currentState=*/}
       </ScrollView>
-      <AddButton />
     </View>
   );
 }
@@ -95,5 +76,11 @@ const indexStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: '#363020'
+  },
+  startingText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white'
   }
+
 })
