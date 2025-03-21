@@ -39,7 +39,7 @@ export default function Setting() {
 
   const deleteTime = async () => {
     try {
-      console.log(`HHAHAHA ${alarmKey}`)
+      console.log(`${alarmKey}`)
       const item = await AsyncStorage.removeItem(alarmKey);
       console.log('Item after removal:', item);
       router.back();

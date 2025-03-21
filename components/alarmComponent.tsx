@@ -7,8 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export async function scheduleAlarm(trigger, theKey) {
   const notificationID = await Notifications.scheduleNotificationAsync({
     content: {
-      title: "The Boy who lives!",
-      body: "Come to diiiiee!",
+      title: "ALARM !",
+      body: "ALARM !",
       sound: true,
       priority: Notifications.AndroidNotificationPriority.HIGH,
     },
